@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,9 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+secret_file = os.path.join(Path(__file__).resolve().parent, 'secret.json')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q7*0aqmbs3yj_j8y-n+$kwf0pz6(=jh-3740-t-u+fegcbh_)l'
+# secrets.json 파일 읽기
+with open(secret_file, 'r') as f:
+    secrets = json.loads(f.read())
+
+SECRET_KEY = secrets["secret"]
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
