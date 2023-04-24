@@ -7,7 +7,7 @@
 .AppleDouble
 .LSOverride
 .idea
-venv
+./venv
 secret.json
 
 # Icon must end with two \r
